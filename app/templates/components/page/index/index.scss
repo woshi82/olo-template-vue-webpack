@@ -1,0 +1,13 @@
+.index {
+    p {
+        background: url('../../../assets/images/favicon.png') no-repeat;
+        font-size: dpr(34px);
+        line-height: rem(160px);
+        color: $red;
+        opacity: 0.9;
+        @include line-gradient(100%, rem(160px));
+    }
+    img {
+        height: rem(100px);
+    }
+}
