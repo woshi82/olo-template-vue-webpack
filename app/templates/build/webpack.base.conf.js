@@ -2,7 +2,7 @@
  * @Author: zengyanling
  * @Date: 2017-04-23 22:46:46
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-05-02 10:55:31
+ * @Last Modified time: 2017-05-02 14:10:47
  */
 /**
  * loaders:
@@ -75,7 +75,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+                test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
                 loader: 'file-loader',
                 options: {
                     limit: 10000,

@@ -8,11 +8,13 @@
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="telephone=no,email=no" name="format-detection">
     <title>index</title>
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-    <!--android及pc系统添加到webApp的icon -->
-    <link rel="apple-touch-icon" href="assets/images/favicon.png">
-    <!-- ios系统添加到webApp的icon -->
-    <link type="image/x-icon" href="assets/images/favicon.png" rel="shortcut icon" />
+    {{#if htmlWebpackPlugin.files.favicon}}
+        <link rel="shortcut icon" href="{{ htmlWebpackPlugin.files.favicon }}" />
+        <!--android及pc系统添加到webApp的icon -->
+        <link rel="apple-touch-icon" href="{{ htmlWebpackPlugin.files.favicon }}" />
+        <!-- ios系统添加到webApp的icon -->
+        <link type="image/x-icon" href="{{ htmlWebpackPlugin.files.favicon }}" rel="shortcut icon" />
+    {{/if}}
     {{#if htmlWebpackPlugin.files.chunks.flexible}}
         <script type="text/javascript" src="{{ htmlWebpackPlugin.files.chunks.flexible.entry }}"></script>
     {{/if}}

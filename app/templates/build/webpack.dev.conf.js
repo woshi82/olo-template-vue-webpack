@@ -2,7 +2,7 @@
  * @Author: zengyanling
  * @Date: 2017-04-21 13:51:06
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-05-02 10:53:38
+ * @Last Modified time: 2017-05-02 15:34:27
  */
 
 var merge = require('webpack-merge');
@@ -23,6 +23,7 @@ module.exports = merge(baseWebpackConfig, {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: '!!handlebars-loader!index.hbs',
+            favicon: 'assets/images/favicon.ico',
             files: {
                 js: ['output/main.js', 'output/flexible.js'],
                 chunks: {

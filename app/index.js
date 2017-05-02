@@ -20,7 +20,7 @@ module.exports = generators.Base.extend({
         this.copy('.editorconfig', '.editorconfig');
         this.template('_package.json', 'package.json');      
         this.copy('gitignore', '.gitignore');
-        this.copy('index.html', 'index.html');
+        this.copy('index.hbs', 'index.hbs');
 
         this.directory('store', 'store');
         this.directory('mock', 'mock');
