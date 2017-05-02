@@ -2,9 +2,12 @@
  * @Author: zengyanling
  * @Date: 2017-04-21 13:51:06
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-26 21:22:29
+ * @Last Modified time: 2017-05-02 10:55:35
  */
-
+/**
+ * loaders:
+ * handlebars-loader
+ */
 process.env.NODE_ENV = 'production';
 var path = require('path');
 var webpack = require('webpack');
@@ -35,7 +38,7 @@ module.exports = merge(baseWebpackConfig, {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'index.html',
+            template: '!!handlebars-loader!index.hbs',
             files: {
                 js: ['output/main.js', 'output/flexible.js'],
                 flexible: 'output/main.js',

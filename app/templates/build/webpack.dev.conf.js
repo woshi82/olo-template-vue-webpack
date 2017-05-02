@@ -2,7 +2,7 @@
  * @Author: zengyanling
  * @Date: 2017-04-21 13:51:06
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-26 21:22:12
+ * @Last Modified time: 2017-05-02 10:53:38
  */
 
 var merge = require('webpack-merge');
@@ -12,14 +12,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var path = require('path');
 var webpack = require('webpack');
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-
+/**
+ * loaders:
+ * handlebars-loader
+ */
 module.exports = merge(baseWebpackConfig, {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         // 更多配置： https://github.com/jantimon/html-webpack-plugin
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'index.html',
+            template: '!!handlebars-loader!index.hbs',
             files: {
                 js: ['output/main.js', 'output/flexible.js'],
                 chunks: {

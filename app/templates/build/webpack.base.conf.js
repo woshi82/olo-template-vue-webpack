@@ -2,9 +2,10 @@
  * @Author: zengyanling
  * @Date: 2017-04-23 22:46:46
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-26 14:46:01
+ * @Last Modified time: 2017-05-02 10:55:31
  */
 /**
+ * loaders:
  * vue-loader、babel-loader、 file-loader、 css-loader、sass-loader
  */
 var path = require('path');
