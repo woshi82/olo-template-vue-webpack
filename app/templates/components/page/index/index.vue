@@ -2,30 +2,30 @@
  * @Author: yourName
  * @Date: 2017-04-28 16:20:38
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-28 16:55:22
+ * @Last Modified time: 2017-05-04 09:50:04
  */
 <template src="./index.html"></template>
-<script>
+<script type="text/javascript">
 import Loading from 'component/loading/loading';
-import { mapState, mapActions, mapGetters } from 'vuex';
+
 export default {
-    data(){
+    data() {
         return {
-            a1:11223311
-        }
+            a: 11223311,
+        };
     },
     components: {
         Loading,
     },
-    created: function() {
-        console.log(11122422112);
+    mounted() {
+        this.v();
     },
     methods: {
-        test(){
-
-        }
-    }
-}
+        v() {
+            console.log('222222ww');
+        },
+    },
+};
 </script>
  <style lang="scss" src="./index.scss"></style>
 

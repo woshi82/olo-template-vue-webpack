@@ -1,3 +1,9 @@
+/*
+ * @Author: yourName
+ * @Date: 2017-04-28 16:20:38
+ * @Last Modified by: zengyanling
+ * @Last Modified time: 2017-05-04 09:50:25
+ */
 
 import Vue from 'vue';
 import Vuex from 'vuex';

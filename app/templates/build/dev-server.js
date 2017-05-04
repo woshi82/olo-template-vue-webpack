@@ -2,9 +2,9 @@
  * @Author: zengyanling
  * @Date: 2017-04-20 15:24:23
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-26 14:58:20
+ * @Last Modified time: 2017-05-04 09:41:56
  */
-process.env.NODE_ENV = 'development';
+
 var webpack = require('webpack');
 var opn = require('opn');
 var path = require('path');
@@ -14,8 +14,9 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var express = require('express');
 var app = express();
 var config = require('../config')
+process.env.NODE_ENV = config.dev.env.NODE_ENV;
 if (!process.env.NODE_ENV) {
-  process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
+  process.env.NODE_ENV = config.dev.env.NODE_ENV
 }
 var webpackConfig = require('./webpack.dev.conf');
 var compiler = webpack(webpackConfig);
@@ -43,7 +44,6 @@ app.use(devMiddleware);
 app.use(hotMiddleware);
 
 // app.use(path.posix.join('/', 'public'), express.static('./public'));
-console.log(path.join(__dirname, '../mock/server.conf'))
 app.use(proxyTool({
     view_path: '', // 避免报错。
     rewrite_file: [path.join(__dirname, '../mock/server.conf')],

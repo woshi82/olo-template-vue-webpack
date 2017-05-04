@@ -2,34 +2,41 @@
  * @Author: zengyanling
  * @Date: 2017-04-23 22:46:46
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-05-02 14:10:47
+ * @Last Modified time: 2017-05-04 09:42:22
  */
-/**
- * loaders:
- * vue-loader、babel-loader、 file-loader、 css-loader、sass-loader
- */
+
+// vue-loader、babel-loader、 file-loader、 css-loader、sass-loader
+
 var path = require('path');
+var webpack = require('webpack');
+var merge = require('webpack-merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var px2rem = require('postcss-flexible');
-// var postcssScss = require('postcss-scss');
 var autoprefixer = require('autoprefixer');
-
+var prodMode = (process.env.NODE_ENV).toLowerCase() === 'production';
+var config = prodMode ? require('../config').prod : require('../config').dev;
+var output = config.output;
+var fileLoaderOpt = config.useRelativePath ? {
+        useRelativePath: true,
+        cssOutputPath: output.css,
+        outputPath: output.img,
+    } : {outputPath: output.img};
 module.exports = {
     entry: {
-        main: process.env.NODE_ENV === 'production' ? './components/main.js' : ['webpack-hot-middleware/client', './components/main.js'],
+        main: prodMode ? './components/main.js' : ['webpack-hot-middleware/client', './components/main.js'],
         flexible: './libs/flexible.js'
     },
     output: {
-        path: path.resolve(__dirname, '../output'),
-        filename: '[name].js',
-        publicPath: '/'
+        path: path.resolve(output.path),
+        filename: `${output.js}[name].js`,
+        publicPath: output.publicPath || ''
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
-            page: path.resolve(__dirname, '../components/page'),
-            component: path.resolve(__dirname, '../components/component'),
-            scss: path.resolve(__dirname, '../assets/scss')
+            page: path.resolve('components/page/'),
+            component: path.resolve('components/component/'),
+            scss: path.resolve('assets/scss/')
         }
     },
     module: {
@@ -43,17 +50,15 @@ module.exports = {
                         plugins: [
                             autoprefixer(),
                             px2rem({ remUnit: 75 }) // TODO: 根据设计图更改
-                        ],
-                        options: {
-                            // parser: postcssScss
-                        }
+                        ]
                     },
                     loaders: {
-                        scss: process.env.NODE_ENV === 'production' ?
+                        scss: prodMode ?
                             ExtractTextPlugin.extract({
                                 use: ['css-loader', 'sass-loader',{
                                     loader: 'sass-loader',
                                     options: {
+                                        sourceMap: prodMode,
                                         data: `@import "~${path.resolve('assets/scss/common.scss')}";`
                                     }
                                 }],
@@ -62,10 +67,10 @@ module.exports = {
                             ['vue-style-loader', 'css-loader', {
                                 loader: 'sass-loader',
                                 options: {
+                                    sourceMap: prodMode,
                                     data: `@import "~${path.resolve('assets/scss/common.scss')}";`
                                 }
                             }]
-                            // ['vue-style-loader', 'css-loader', 'sass-loader']
                     }
                 }
             },
@@ -77,27 +82,13 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
                 loader: 'file-loader',
-                options: {
+                options: merge(fileLoaderOpt,{
                     limit: 10000,
-                    // useRelativePath: true,
-                    // name: 'img/[name].[hash:7].[ext]'
-                    name: 'public/img/[name].[ext]'
-                    // name: utils.assetsPath('img/[name].[hash:7].[ext]')
-                }
-            },
-            // {
-            //     test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-            //     loader: 'file-loader',
-            //     options: {
-            //         limit: 10000,
-            //         name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
-            //     }
-            // }
+                    name: '[name].[ext]'
+                })
+            }
         ]
     },
     plugins: [
-        // new webpack.HotModuleReplacementPlugin(),
-
-        // new webpack.NoErrorsPlugin()
     ]
 };
