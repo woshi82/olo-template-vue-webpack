@@ -2,13 +2,13 @@
 
 root = true
 [*]
-indent_style = indent
+indent_style = space
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{js,handlebars,json}]
+[*.{js,handlebars,json,vue}]
 indent_size = 4
 
 [*.{css,scss}]
