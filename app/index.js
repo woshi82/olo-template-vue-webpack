@@ -14,6 +14,7 @@ module.exports = generators.Base.extend({
     },
     // 创建文件结构
     makeProjectDirectoryStructure: function () {
+        this.copy('.babelrc', '.babelrc');
         this.copy('.bowerrc', '.bowerrc');
         this.copy('.eslintrc', '.eslintrc');
         this.copy('.eslintignore', '.eslintignore');
