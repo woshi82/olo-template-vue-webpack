@@ -2,11 +2,10 @@
  * @Author: zengyanling
  * @Date: 2017-04-23 22:46:46
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-05-04 09:42:22
+ * @Last Modified time: 2017-05-26 15:32:58
  */
 
 // vue-loader、babel-loader、 file-loader、 css-loader、sass-loader
-
 var path = require('path');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
@@ -21,6 +20,11 @@ var fileLoaderOpt = config.useRelativePath ? {
         cssOutputPath: output.css,
         outputPath: output.img,
     } : {outputPath: output.img};
+// var fileLoaderFontOpt = config.useRelativePath ? {
+//         useRelativePath: true,
+//         cssOutputPath: output.css,
+//         outputPath: output.font,
+//     } : {outputPath: output.font};
 module.exports = {
     entry: {
         main: prodMode ? './components/main.js' : ['webpack-hot-middleware/client', './components/main.js'],
@@ -75,9 +79,29 @@ module.exports = {
                 }
             },
             {
+                test: /(reset\.scss)$/,
+                use: prodMode ?
+                    ExtractTextPlugin.extract({
+                        use: ['css-loader', {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: prodMode,
+                                data: `@import "~${path.resolve('assets/scss/common.scss')}";`
+                            },
+                        }],
+                    }) :
+                    ['style-loader', 'css-loader', {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: prodMode,
+                            data: `@import "~${path.resolve('assets/scss/common.scss')}";`
+                        }
+                    }]
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/
+                exclude: /node_modules/,
             },
             {
                 test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
@@ -86,7 +110,15 @@ module.exports = {
                     limit: 10000,
                     name: '[name].[ext]'
                 })
-            }
+            },
+            // {
+            //     test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+            //     loader: 'file-loader',
+            //     options: merge(fileLoaderFontOpt,{
+            //         limit: 10000,
+            //         name: '[name].[ext]'
+            //     })
+            // }
         ]
     },
     plugins: [

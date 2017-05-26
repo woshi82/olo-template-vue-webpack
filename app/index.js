@@ -25,6 +25,7 @@ module.exports = generators.Base.extend({
         this.directory('store', 'store');
         this.directory('mock', 'mock');
         this.directory('libs', 'libs');
+        this.directory('api', 'api');
         this.directory('config', 'config');
         this.directory('build', 'build');
         this.directory('components', 'components');

@@ -1,6 +1,4 @@
-
-@import './reset.scss';
-
+// scss 变量、函数…… 放在这里
 $red: red;
 @mixin line-gradient($width:1px, $height:1.3rem, $color:#dadada) {
     width: $width;
