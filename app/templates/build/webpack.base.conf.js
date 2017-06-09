@@ -2,7 +2,7 @@
  * @Author: zengyanling
  * @Date: 2017-04-23 22:46:46
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-05-26 15:32:58
+ * @Last Modified time: 2017-06-09 18:17:45
  */
 
 // vue-loader、babel-loader、 file-loader、 css-loader、sass-loader
@@ -63,7 +63,7 @@ module.exports = {
                                     loader: 'sass-loader',
                                     options: {
                                         sourceMap: prodMode,
-                                        data: `@import "~${path.resolve('assets/scss/common.scss')}";`
+                                        data: `@import "~${path.resolve('assets/scss/common.scss').replace(/\\/g, '/')}";`   // 兼容windows反斜杠被sass解析成编码字符串的问题
                                     }
                                 }],
                                 fallback: 'vue-style-loader'
@@ -72,7 +72,7 @@ module.exports = {
                                 loader: 'sass-loader',
                                 options: {
                                     sourceMap: prodMode,
-                                    data: `@import "~${path.resolve('assets/scss/common.scss')}";`
+                                    data: `@import "~${path.resolve('assets/scss/common.scss').replace(/\\/g, '/')}";`
                                 }
                             }]
                     }
@@ -86,7 +86,7 @@ module.exports = {
                             loader: 'sass-loader',
                             options: {
                                 sourceMap: prodMode,
-                                data: `@import "~${path.resolve('assets/scss/common.scss')}";`
+                                data: `@import "~${path.resolve('assets/scss/common.scss').replace(/\\/g, '/')}";`
                             },
                         }],
                     }) :
@@ -94,7 +94,7 @@ module.exports = {
                         loader: 'sass-loader',
                         options: {
                             sourceMap: prodMode,
-                            data: `@import "~${path.resolve('assets/scss/common.scss')}";`
+                            data: `@import "~${path.resolve('assets/scss/common.scss').replace(/\\/g, '/')}";`
                         }
                     }]
             },
